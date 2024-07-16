@@ -211,7 +211,7 @@ function fetchAppointments($userid,$connect)
             if($_SESSION['userType']=='user'){
               if($row['status']=='Accepted'){
                 $act = '
-                <a class="dropdown-item text-danger accept" aid="'.$row['aid'].'"><i class="bx bxs-trash mr-3"></i> Cancel Appointment</a>';
+                <a class="dropdown-item text-danger accept" stat="Cancelled" aid="'.$row['aid'].'"><i class="bx bxs-trash mr-3"></i> Cancel Appointment</a>';
                 if($pstatus=='Accepted'){
                   $acb = '<button class="btn btn-info btn-md download" href="#"><i class="fa fa-download">&nbsp Download Pass</i></button>';
                   if($expires!=''){

@@ -60,7 +60,7 @@
 
   <div class="container">
     <div class="copyright">
-      &copy; 2021 <strong><span>iDonate</span></strong>. All Rights Reserved
+      &copy; <?=date('Y')?><strong><span>iDonate</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       It's not how much we give, but how much love we put into giving.

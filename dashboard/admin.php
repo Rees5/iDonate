@@ -91,7 +91,7 @@
            <div class="justify-content-end d-flex">
             <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
               <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-               <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
+               <i class="mdi mdi-calendar"></i> Today (<?=date("d M, Y")?>)
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
                 <a class="dropdown-item" href="#">January - March</a>
@@ -198,7 +198,7 @@
     $types =  ['A+','A-','B+','B-','O+','O-','AB+','AB-'];
     $data = [];
     foreach ($types as $value) {
-      $queryx = "SELECT * FROM `stock_by_group` where bloodType = '$value' ";
+      $queryx = "SELECT sum(quantity) as qty FROM `donation_report` where bloodType = '$value'";
       $statementx = $connect->prepare($queryx);
       if($statementx->execute()){
         $countx = $statementx->rowCount();
@@ -208,10 +208,10 @@
           } else {
             foreach($resultx as $rowx)
             {
-              if($rowx['total_stock']==''){
+              if($rowx['qty']==''){
                 $stock =0;
               }else {
-                $stock = $rowx['total_stock'];
+                $stock = $rowx['qty'];
               }
             }
           }
@@ -259,59 +259,59 @@ background: #f8f8f8;
 background: #f1f7ff;
 }
 </style>
+
 <script>
-Highcharts.chart('container', {
-chart: {
-  type: 'column'
-},
-title: {
-  text: 'Blood Availability'
-},
-subtitle: {
-  text: 'Source: iDonate'
-},
-xAxis: {
-  categories: [
-    'A+',
-    'A-',
-    'B+',
-    'B-',
-    'O+',
-    'O-',
-    'AB+',
-    'AB-'
-  ],
-  crosshair: true
-},
-yAxis: {
-  min: 0,
-  title: {
-    text: 'Blood (ml)'
-  }
-},
-tooltip: {
-  headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-  pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-    '<td style="padding:0"><b>{point.y:.1f} ml</b></td></tr>',
-  footerFormat: '</table>',
-  shared: true,
-  useHTML: true
-},
-plotOptions: {
-  column: {
-    pointPadding: 0.1,
-    borderWidth: 0
-  }
-},
-series: [{
-  name: 'Donated',
-
-  data: [<?php echo join($data, ',') ?>]
-
-}, {
-  name: 'Transfused',
-  data: [0, 0,0,0, 0,0, 0, 0]
-
-}]
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Blood Availability'
+            },
+            subtitle: {
+                text: 'Source: iDonate'
+            },
+            xAxis: {
+                categories: [
+                    'A+',
+                    'A-',
+                    'B+',
+                    'B-',
+                    'O+',
+                    'O-',
+                    'AB+',
+                    'AB-'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Blood (ml)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} ml</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.1,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Donated',
+                data: <?=json_encode(array_values($data))?>//[12, 1, 34, 54, 76, 768, 34, 1223]
+            }, {
+                name: 'Transfused',
+                data: [0, 0, 0, 0, 0, 0, 0, 0]
+            }]
+        });
+    });
 </script>

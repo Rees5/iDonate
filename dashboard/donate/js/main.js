@@ -117,7 +117,7 @@ $(function(){
 				data:form_data,
 				success:function(data)
 				{
-					if(data=='success'){
+					if(data==='success'){
 						$('#error_result').html(data);
 						window.parent.closeModal();
 					}else {

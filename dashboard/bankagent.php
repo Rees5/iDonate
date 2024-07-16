@@ -67,7 +67,7 @@
            <div class="justify-content-end d-flex">
             <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
               <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-               <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
+               <i class="mdi mdi-calendar"></i> Today (<?=date("d M, Y")?>)
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
                 <a class="dropdown-item" href="#">January - March</a>
@@ -143,12 +143,12 @@
                                 if (!$resultxa) {
                                   $stock =0;
                                 } else {
-                                  foreach($resultx as $rowxa)
+                                  foreach($resultxa as $rowxa)
                                   {
-                                    if($rowxa['total_stock']==''){
+                                    if($rowxa['qty']==''){
                                       $stock =0;
                                     }else {
-                                      $stock = $rowxa['total_stock'];
+                                      $stock = $rowxa['qty'];
                                     }
                                   }
                                 }
@@ -174,7 +174,7 @@
     $types =  ['A+','A-','B+','B-','O+','O-','AB+','AB-'];
     $data = [];
     foreach ($types as $value) {
-      $queryx = "SELECT * FROM `stock_by_group` where bloodType = '$value' ";
+      $queryx = "SELECT sum(quantity) as qty FROM `donation_report` where bloodType = '$value' ";
       $statementx = $connect->prepare($queryx);
       if($statementx->execute()){
         $countx = $statementx->rowCount();
@@ -184,10 +184,10 @@
           } else {
             foreach($resultx as $rowx)
             {
-              if($rowx['total_stock']==''){
+              if($rowx['qty']==''){
                 $stock =0;
               }else {
-                $stock = $rowx['total_stock'];
+                $stock = $rowx['qty'];
               }
             }
           }

@@ -18,9 +18,11 @@
       </tr>
       <tr style="height: 22px;" data-mce-style="height: 22px;">
          <td style="width: 40.2437%; height: 22px;" data-mce-style="width: 40.2437%; height: 22px;">Last Donation</td>
-         <td style="width: 56.5143%; height: 22px;" data-mce-style="width: 56.5143%; height: 22px;">N/A<br></td>
+         <td style="width: 56.5143%; height: 22px;" data-mce-style="width: 56.5143%; height: 22px;"><?php if(isset($_SESSION['pre'])){
+                  echo $_SESSION['pre'];
+                } ?><br></td>
       </tr>
-      <tr style="height: 22px;" data-mce-style="height: 22px;">
+      <tr style="height: 22px;" data-mce-style="height: 22px;"> 
          <td style="width: 40.2437%; height: 22px;" data-mce-style="width: 40.2437%; height: 22px;">Problems</td>
          <td style="width: 56.5143%; height: 22px;" data-mce-style="width: 56.5143%; height: 22px;">N/A<br></td>
       </tr>

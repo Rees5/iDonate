@@ -5,11 +5,11 @@ $details = fetchUser($_SESSION['userID'],$connect);
 $medic = fetchMeds($_SESSION['userID'],$connect);
  ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
     <meta charset="utf-8">
     <title>iDonate | Settings</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -590,7 +590,7 @@ $medic = fetchMeds($_SESSION['userID'],$connect);
         </style>
 
         <script src="../vendors/tinymce/tinymce.min.js"></script>
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBHpAmimxTn6JfSP_-1PavnZ9WvAE6eCtc&libraries=places"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAILGVlt-SOiL381JT3TQ9dxxoNIUuxrV8&libraries=places"></script>
         <script type="text/javascript">
         //tabs
         $('a[data-toggle="tab"]').click(function (e) {

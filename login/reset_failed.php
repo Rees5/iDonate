@@ -41,7 +41,7 @@
             </div>
             <div class="row mt-5">
               <div class="col-12 mt-xl-2">
-                <p class="text-white font-weight-medium text-center">Copyright &copy; iDonate 2021.</p>
+                <p class="text-white font-weight-medium text-center">Copyright &copy; iDonate <?=date("Y")?>.</p>
               </div>
             </div>
           </div>

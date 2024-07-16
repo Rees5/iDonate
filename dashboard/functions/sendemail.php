@@ -15,16 +15,16 @@ function sendMail($to,$body,$heading)
 
   try {
       //Server settings
-      $mail->Host = 'smtp.gmail.com';
+      $mail->Host = 'f-apps.co.ke';
       $mail->Port = 465;
       $mail->isSMTP();
       $mail->SMTPSecure = 'ssl';
       $mail->SMTPAuth = true;
       $mail->CharSet = 'utf-8';
-      $mail->Username = 'auth.educo@gmail.com';
-      $mail->Password = 'alumasa9';
+      $mail->Username = 'idonate@f-apps.co.ke';
+      $mail->Password = '}gujh?Sk*^Hr';
       //Recipients
-      $mail->setFrom('reesalumasa@gmail.com', 'iDonate');
+      $mail->setFrom('idonate@f-apps.co.ke', 'iDonate');
       $mail->addAddress($to);     //Add a recipient
       //$mail->addAddress('ellen@example.com');               //Name is optional
       //$mail->addReplyTo('info@example.com', 'Information');

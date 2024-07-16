@@ -78,11 +78,10 @@ function updateMedic($userID,$bloodType,$weight,$height,$connect){
       }
     } else {
       $statement = $connect->prepare("
-        insert into tbl_medicinfo(UUID,userID,bloodType,weight,height) values(:UUID,:userID,:bloodType,:weight,:height)
+        insert into tbl_medicinfo(userID,bloodType,weight,height) values(:userID,:bloodType,:weight,:height)
     	");
       if($statement->execute(
     		array(
-          'UUID' => uniqid(),
           'bloodType' => $bloodType,
           'weight' => $weight,
           'height' => $height,

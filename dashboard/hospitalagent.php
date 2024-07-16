@@ -68,7 +68,7 @@
            <div class="justify-content-end d-flex">
             <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
               <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-               <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
+               <i class="mdi mdi-calendar"></i> Today (<?=date("d M, Y")?>)
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
                 <a class="dropdown-item" href="#">January - March</a>
@@ -133,10 +133,11 @@
                         {
                           echo "<tr><td>". $rowx['name']."</td>";
                           $types =  ['A+','A-','B+','B-','O+','O-','AB+','AB-'];
-                          $data = [];
+                           $data = [];
                           foreach ($types as $value) {
                             $stock =0;
                             $queryxa = "SELECT sum(quantity) as qty FROM `donation_report` where bloodType = '$value' and donation_venue = '".$rowx['name']."'  ";
+                            //echo $queryxa;
                             $statementxa = $connect->prepare($queryxa);
                             if($statementxa->execute()){
                               $countxa = $statementxa->rowCount();
@@ -144,12 +145,14 @@
                                 if (!$resultxa) {
                                   $stock =0;
                                 } else {
-                                  foreach($resultx as $rowxa)
+                                  //print_r($resultxa);
+                                  foreach($resultxa as $rowxab)
                                   {
-                                    if($rowxa['total_stock']==''){
+
+                                    if($rowxab['qty']==''){
                                       $stock =0;
                                     }else {
-                                      $stock = $rowxa['total_stock'];
+                                      $stock = $rowxab['qty'];
                                     }
                                   }
                                 }
@@ -175,7 +178,7 @@
     $types =  ['A+','A-','B+','B-','O+','O-','AB+','AB-'];
     $data = [];
     foreach ($types as $value) {
-      $queryx = "SELECT * FROM `stock_by_group` where bloodType = '$value' ";
+      $queryx = "SELECT sum(quantity) as total_stock FROM `donation_report` where bloodType = '$value' ";
       $statementx = $connect->prepare($queryx);
       if($statementx->execute()){
         $countx = $statementx->rowCount();

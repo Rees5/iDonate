@@ -108,51 +108,45 @@
       popupAnchor: [1, -34],
       shadowSize: [41, 41]
     });
-  $.ajax({
-   url: "../fetch_drives.php",
-   type: "POST",
-   data: {lat:lat,lng:lng},
-   success: function(data)
-   {
-       data = JSON.parse(JSON.stringify(data));
-       console.log(data);
-      marker1=new L.marker([position.coords.latitude, position.coords.longitude], {icon: greenIcon}).bindPopup("Your Location").addTo(map);
+    $.ajax({
+    url: "../fetch_drives.php",
+    type: "POST",
+    data: {lat: lat, lng: lng},
+    success: function(data) {
+        data = JSON.parse(JSON.stringify(data));
+        console.log(data);
 
-       markers.addLayer(marker1);
-          markerArray.push(marker1);
+        var marker1 = new L.marker([position.coords.latitude, position.coords.longitude], {icon: greenIcon})
+            .bindPopup("Your Location")
+            .addTo(map);
+        markers.addLayer(marker1);
+        markerArray.push(marker1);
 
-       for (var i = 0; i < data.length; i++) {
-         loc = "<p><b>"+data[i]["name"]+"</b></p>";
-         loc +="<hr>";
-         loc +=" <p>Type: "+data[i]["type"]+"</p>";
-         loc +="<p>Address: "+data[i]["address"]+"</p>";
-         loc +=" <p>Contact: "+data[i]["contact"]+"</p>";
-         loc += "<p><button class='btn btn-primary btn-sm' onclick=\"window.location.href='navigation?fdst="+data[i]['name']+"&lat="+lat+"&lng="+lng+"&dlat="+data[i]['lat']+"&dlng="+data[i]['lng']+"'\">Directions &nbsp<i class='fa fa-map-o'></i></button> &nbsp";
-         loc += "<a href='../../appointments' target='_top'><button class='btn btn-info btn-sm'>Book Appointment &nbsp<i class='fa fa-calendar'></i></button></a></p>";
-         marker = new L.marker([data[i]["lat"], data[i]["lng"]],{icon: redIcon})
-         .bindPopup(loc).addTo(map);
-         /*marker = new L.marker([data[i]["lat"], data[i]["lng"]],{icon: redIcon})
-         .bindPopup(loc).addTo(map).on('click', function (e) {
-           //map.panTo(e.latlng, 13);
-          // sidebar.toggle();
-           //document.getElementById('lc'+i).innerHTML = "<span id='lc'><h2>"+loc+"</h2></span>";
-           //sidebar.setContent('<h3>Your current location</h3>');
-           //sidebar.setContent(htm);
-         });*/
+        for (var i = 0; i < data.length; i++) {
+            var loc = "<p><b>" + data[i]["name"] + "</b></p>";
+            loc += "<hr>";
+            loc += "<p>Type: " + data[i]["type"] + "</p>";
+            loc += "<p>Address: " + data[i]["address"] + "</p>";
+            loc += "<p>Contact: " + data[i]["contact"] + "</p>";
+            loc += "<p><button class='btn btn-primary btn-sm' onclick=\"window.location.href='navigation?fdst=" + data[i]['name'] + "&lat=" + lat + "&lng=" + lng + "&dlat=" + data[i]['lat'] + "&dlng=" + data[i]['lng'] + "'\">Directions &nbsp<i class='fa fa-map-o'></i></button> &nbsp";
+            loc += "<a href='../../appointments' target='_top'><button class='btn btn-info btn-sm'>Book Appointment &nbsp<i class='fa fa-calendar'></i></button></a></p>";
 
-          markers.addLayer(marker);
-    			markerArray.push(marker);
-          if(i==data.length-1){
-              var group = L.featureGroup(markerArray);
-              map.fitBounds(group.getBounds());
-          }
+            if (data[i]["lat"] && data[i]["lng"]) {
+                var marker = new L.marker([data[i]["lat"], data[i]["lng"]], {icon: redIcon})
+                    .bindPopup(loc)
+                    .addTo(map);
+                markers.addLayer(marker);
+                markerArray.push(marker);
+            }
+        }
 
-       }
-        //map.addLayer(markers);
-    		var group = new L.featureGroup(markers);
-    		map.fitBounds(group.getBounds());
-   }
- });
+        if (markerArray.length > 0) {
+            var group = L.featureGroup(markerArray);
+            map.fitBounds(group.getBounds());
+        }
+    }
+});
+
   L.tileLayer(
   'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZmFyYWRheTIiLCJhIjoiTUVHbDl5OCJ9.buFaqIdaIM3iXr1BOYKpsQ', {
     attribution: '© <a href="./">iDonate</a> © <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',

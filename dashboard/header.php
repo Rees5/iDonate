@@ -94,28 +94,55 @@ $_SESSION['tot'] = $tot;
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>iDonate | Dashboard</title>
-  <!-- plugins:css -->
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="vendors/feather/feather.css">
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
   <!-- End plugin css for this page -->
+  <link rel="stylesheet" href="vendors/select2/select2.min.css">
+  <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="vendors/tinymce/skins/ui/oxide/skin.min.css">
   <!-- inject:css -->
   <link id="style1" rel="stylesheet" href="css/vertical-layout-light/style.css">
+  <script>
+
+// Retrieve
+//document.getElementById("result").innerHTML = localStorage.getItem("mode");
+  function toggle() {
+    var a = document.getElementById("style1");
+    if(localStorage.getItem("mode")!=null){
+      if(localStorage.getItem("mode")=='dark'){
+        a.x ='light';
+      } else {
+        a.x = 'dark';
+      }
+    } else {
+        a.x = 'dark' == a.x ? 'light' : 'dark'; // short if
+    }
+    a.href = '../css/vertical-layout-' + a.x + '/style.css';
+    localStorage.setItem("mode", a.x);
+  }
+
+  </script>
   <!-- endinject -->
-  <link href="../assets/img/favicon.ico" rel="icon">
-  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-  <link rel="shortcut icon" href="../assets/img/apple-touch-icon.png" />
-  <link rel="stylesheet" href="./style.css">
+  <link href="../../assets/img/favicon.ico" rel="icon">
+  <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+      <script src="../register/js/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="../register/vendor/date-picker/css/datepicker.min.css">
+  <script src="../register/vendor/date-picker/js/datepicker.js"></script>
 </head>
 <body>
+
+
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">

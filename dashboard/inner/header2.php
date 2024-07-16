@@ -197,10 +197,10 @@ $_SESSION['tot'] = $tot;
                 if($_SESSION['img']!=''){
                   echo $_SESSION['img'];
                 }else {
-                  echo "../../assets/img/user.png";
+                  echo "../../../assets/img/user.png";
                 }
               }else {
-                echo "../../assets/img/user.png";
+                echo "../../../assets/img/user.png";
               }
                ?>" alt="profile"/>&nbsp<?php if(isset($_SESSION['fullName'])){
                 echo $_SESSION['fullName'];
